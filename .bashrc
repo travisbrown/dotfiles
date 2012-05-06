@@ -2,7 +2,7 @@ export PATH=$PATH:~/bin:~/.cabal/bin:/opt/java/bin:/opt/jruby/bin
 export HISTSIZE=1048576
 export HISTFILESIZE=$HISTSIZE
 export HISTCONTROL=erasedups
-export HISTIGNORE="ls:ls *:cd:cd -:pwd:sudo poweroff:date:acpi:sensors"
+export HISTIGNORE="ls:cd:cd -:pwd:sudo poweroff:date:acpi:sensors"
 export JAVA_HOME=/opt/java
 export GDK_NATIVE_WINDOWS=1
 export GREP_OPTIONS='--color=auto'
