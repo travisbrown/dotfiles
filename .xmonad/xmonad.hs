@@ -1,11 +1,26 @@
 import XMonad
-import XMonad.Hooks.DynamicLog (xmobar)
+import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.SetWMName (setWMName)
 import XMonad.Layout.NoBorders (smartBorders)
 import XMonad.Util.EZConfig (additionalKeysP)
+import Control.Monad (liftM2)
+import qualified Data.Map as M
 
-main = xmonad =<< xmobar myConfig
+toggleStrutsKey :: XConfig t -> (KeyMask, KeySym)
+toggleStrutsKey XConfig{modMask = modm} = (modm, xK_b )
+
+myStatusBar conf = do
+  spawn "xmobar"
+  return $ conf
+    { layoutHook = avoidStruts (layoutHook conf)
+    , logHook    = logHook conf
+    , manageHook = manageHook conf <+> manageDocks
+    , keys       = liftM2 M.union keys' (keys conf)
+    }
+    where keys' = (`M.singleton` sendMessage ToggleStruts) . toggleStrutsKey
+
+main = xmonad =<< myStatusBar myConfig
 
 myConfig = defaultConfig
   { terminal           = "xterm"
