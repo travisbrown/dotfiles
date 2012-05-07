@@ -12,18 +12,18 @@ main = xmonad $ defaultConfig
   { terminal           = "xterm"
   , normalBorderColor  = "#cccccc"
   , focusedBorderColor = "#ff2b06"
-  , layoutHook  = avoidStruts . smartBorders $ tiled ||| Mirror tiled ||| Full
-  , manageHook  = myManageHook <+> manageHook defaultConfig
+  , layoutHook = avoidStruts . smartBorders $ tiled ||| Mirror tiled ||| Full
+  , manageHook = myManageHook <+> manageHook defaultConfig
   , startupHook
     =  setWMName "LG3D"
     >> spawn "xmobar"
     >> broadcastMessage ToggleStruts
   }
   `additionalKeysP`
-  [ ("M-x c", spawn "chromium")
-  , ("M-x f", spawn "firefox")
-  , ("M-x t", spawn "thunderbird")
-  , ("M-b",   sendMessage ToggleStruts)
+  [ ("M-x c" , spawn "chromium")
+  , ("M-x f" , spawn "firefox")
+  , ("M-x t" , spawn "thunderbird")
+  , ("M-b"   , sendMessage ToggleStruts)
   ]
   where
     tiled   = Tall nmaster delta ratio
